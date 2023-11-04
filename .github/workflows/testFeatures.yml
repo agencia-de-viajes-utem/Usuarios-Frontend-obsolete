@@ -21,9 +21,9 @@ jobs:
           node-version: 14
 
       # Pruebas para Frontend de Agendamiento
-      - name: Frontend Tests (Agendamiento)
+      - name: Frontend Tests (Usuarios)
         run: |
-          cd vista-agendamiento/front
+          cd Usuarios-Frontend/front
           # Comandos para ejecutar pruebas unitarias en el frontend (React)
           # Asegúrate de configurar las pruebas para los componentes JSX
           npm install   # Instala las dependencias del proyecto (si es necesario)
