@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: self-end;
-    height: 91vh;
-    width: 70%;
+    width: 90%;
 }
 
 .registro-form form {

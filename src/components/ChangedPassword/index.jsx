@@ -11,7 +11,7 @@ export default function ChangedPassword() {
     };
 
     return (
-        <div className="container">
+        <div className="container-changed-password">
             <div className="tittle">
                 <h1>RESTABLECER CONTRASEÑA</h1>
             </div>
