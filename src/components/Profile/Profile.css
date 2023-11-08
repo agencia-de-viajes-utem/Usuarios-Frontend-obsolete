@@ -5,11 +5,11 @@
     height: 100%;
 }
 
-.container {
+.sub-container {
     display: flex;
     box-sizing: content-box;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
     height: 100%;
     width: 100%;
     gap: 2rem;

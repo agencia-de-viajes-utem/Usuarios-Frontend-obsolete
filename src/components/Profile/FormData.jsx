@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import InputProfile from "./InputProfile";
 import { ChangeData } from "../../utils/schemas/changeData";
 import ButtonSubmit from "../Form/ButtonSubmit";
+import InputFile from "../Form/InputFile";
 import "./FormData.css";
 export default function FormData({ children }) {
     const submit = () => {
@@ -21,7 +22,7 @@ export default function FormData({ children }) {
             >
                 <Form className="container_form_perfil">
                     <div className="container_avatar">
-                        <InputProfile name="avatar" type="file" />
+                        <InputFile />
                     </div>
                     <div className="container_names">
                         <InputProfile
@@ -61,9 +62,8 @@ export default function FormData({ children }) {
                     <div className="container_data_form2">
                         <InputProfile
                             name="fechanacimiento"
-                            type="text"
+                            type="date"
                             content="Fecha de nacimiento"
-                            placeholder="0/0/0"
                         />
                         <ButtonSubmit content="Guardar cambios" />
                     </div>

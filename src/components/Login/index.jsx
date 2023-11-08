@@ -4,7 +4,7 @@ import ButtonSubmit from "../Form/ButtonSubmit";
 import ButtonSocial from "../Form/ButtonSocial";
 import { FacebookIcon, GoogleIcon } from "../Icons";
 import { Link, useLocation } from "wouter";
-import { login } from "../../api";
+import { login, loginWithGoogle } from "../../api";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "../../utils/schemas/loginSchema";
 import { useState, useEffect } from "react";
@@ -34,6 +34,17 @@ function Login() {
             console.error("Login failed:", error.message);
         }
     };
+    /**
+ const handleLoginFacebook = async () => {
+     try {
+         const userData = await loginWithFacebook();
+         console.log("User data:", userData);
+     } catch (error) {
+         console.error("Login failed:", error.message);
+     }
+ };
+ 
+ */
 
     return (
         <div className="container-login">
@@ -42,7 +53,7 @@ function Login() {
                     <h1>BIENVENIDO</h1>
                     <p>Por favor ingrese sus datos</p>
                 </div>
-                {res === 404 ? <div>Los datos son incorrectos</div> : null}
+                {res === 400 ? <div>Los datos son incorrectos</div> : null}
                 <Formik
                     initialValues={{
                         email: "",
@@ -90,10 +101,13 @@ function Login() {
                     </ButtonSocial>
                 </div>
                 <div className="container-forgotten">
-                    <p>
-                        ¿No tienes una cuenta?{" "}
-                        <span className="text-high">Registrate</span>
-                    </p>
+                    <Link href="/register">
+                        <p>
+                            ¿No tienes una cuenta?
+                            <span className="text-high">Registrate</span>
+                        </p>
+                    </Link>
+
                     <Link href="/forgot-password">
                         <p className="text-high">¿Olvidaste tu contraseña?</p>
                     </Link>

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import { Link, useLocation } from "wouter";
 import { register } from "../../api";
+import { RegisterSchema } from "../../utils/schemas/registerSchema";
 
 const email2 = (email) => {
     const correo = "test@gmail.com";
@@ -23,28 +24,29 @@ export default function Register() {
     useEffect(() => {
         // 2. Usa useEffect
         if (res === 200) {
-            setLocation("/register/success");
-        } else if (res === 400) {
-            console.log("manejar error");
+            setLocation("/");
         }
+        console.log(res);
     }, [res, setLocation]);
+
     const handleSubmit = async (values) => {
         const result = await register({
             email: values.email,
             password: values.password,
             confirmPassword: values.confirmpassword,
+            nombre: values.nombre,
+            apellido: values.apellido,
+            apellido2: values.apellido2,
+            rut: values.rut,
+            telefono: values.telefono,
         });
         setRes(result);
-
-        console.log(result);
-
         // Ahora, utiliza result en lugar de res para la comparación
         const passwordMatch = comparacion(
             values.password,
             values.confirmpassword
         );
         setPassword(passwordMatch);
-        console.log(passwordMatch);
     };
 
     function comparacion(password, confirmpassword) {
@@ -62,15 +64,18 @@ export default function Register() {
             </div>
             <div className="registro-form">
                 <Formik
-                    onSubmit={handleSubmit}
                     initialValues={{
                         nombre: "",
-                        apellidos: "",
+                        apellido: "",
+                        apellido2: "",
                         email: "",
+                        rut: "",
                         telefono: "",
                         password: "",
                         confirmpassword: "",
                     }}
+                    onSubmit={handleSubmit}
+                    validationSchema={RegisterSchema}
                 >
                     <Form>
                         <div>
@@ -84,10 +89,16 @@ export default function Register() {
                             placeholder="Ej: Diego Andres"
                         />
                         <Input
-                            name="apellidos"
+                            name="apellido"
                             type="text"
-                            content="Apellidos"
-                            placeholder="Ej: Hernandez Garcia"
+                            content="Apellido paterno"
+                            placeholder="Ej: Hernandez "
+                        />
+                        <Input
+                            name="apellido2"
+                            type="text"
+                            content="Apellido materno"
+                            placeholder="Ej: Garcia"
                         />
                         <Input
                             name="email"
@@ -97,9 +108,15 @@ export default function Register() {
                         />
                         <Input
                             name="telefono"
-                            type="numb"
+                            type="text"
                             content="Telefono"
                             placeholder="+56977172355"
+                        />
+                        <Input
+                            name="rut"
+                            type="text"
+                            content="Rut"
+                            placeholder="11111111-1"
                         />
                         <Input
                             name="password"
@@ -115,14 +132,16 @@ export default function Register() {
                         />
 
                         <ButtonSubmit content="Registrarse" />
-                        <div className="error-message">
-                            {password ? null : (
+                        {password ? null : (
+                            <div className="error-message">
                                 <div>Las contraseñas no coincide</div>
-                            )}
-                            {res === 406 ? (
+                            </div>
+                        )}
+                        {res === 400 ? (
+                            <div className="error-message">
                                 <div>El correo ya se encuentra registrado</div>
-                            ) : null}
-                        </div>
+                            </div>
+                        ) : null}
                     </Form>
                 </Formik>
             </div>
