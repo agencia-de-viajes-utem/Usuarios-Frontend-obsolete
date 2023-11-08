@@ -42,7 +42,7 @@ function Login() {
                     <h1>BIENVENIDO</h1>
                     <p>Por favor ingrese sus datos</p>
                 </div>
-                {res === 404 ? <div>Los datos son incorrectos</div> : null}
+                {res === 400 ? <div>Los datos son incorrectos</div> : null}
                 <Formik
                     initialValues={{
                         email: "",

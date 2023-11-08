@@ -1,4 +1,6 @@
-const baseURL = "http://localhost:3000";
+const baseURL = "";
+
+//añadir env
 export async function loginWithGoogle() {
     try {
         // Haciendo una solicitud GET a la ruta /login-google en tu servidor
@@ -30,7 +32,7 @@ export async function login({ email, password }) {
         formData.append("email", email);
         formData.append("password", password);
 
-        const response = await fetch("http://user.lumonidy.studio/login", {
+        const response = await fetch(baseURL + "/login", {
             method: "POST",
             body: formData,
         });
@@ -50,7 +52,7 @@ export async function register({ email, password, confirmPassword }) {
         formData.append("password", password);
         formData.append("confirmPassword", confirmPassword);
 
-        const response = await fetch("http://user.lumonidy.studio/register", {
+        const response = await fetch(baseURL + "/register", {
             method: "POST",
             body: formData,
         });

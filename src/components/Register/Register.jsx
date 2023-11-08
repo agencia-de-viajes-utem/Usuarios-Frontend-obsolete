@@ -24,8 +24,6 @@ export default function Register() {
         // 2. Usa useEffect
         if (res === 200) {
             setLocation("/register/success");
-        } else if (res === 400) {
-            console.log("manejar error");
         }
     }, [res, setLocation]);
     const handleSubmit = async (values) => {
@@ -119,7 +117,7 @@ export default function Register() {
                             {password ? null : (
                                 <div>Las contraseñas no coincide</div>
                             )}
-                            {res === 406 ? (
+                            {res === 400 ? (
                                 <div>El correo ya se encuentra registrado</div>
                             ) : null}
                         </div>
